@@ -44,11 +44,11 @@ formatted_coffee_franchises <- coffee_franchises %>%
 
 
 coffee_icon_list <- iconList(
-  blenz = makeIcon("geo_mapping/assets/blenz_logo.jpeg", "geo_mapping/assets/blenz_logo.jpeg", 32, 32, shadowWidth = 5),
-  jj_bean = makeIcon("geo_mapping/assets/jj_bean_logo.png", "geo_mapping/assets/jj_bean_logo.png", 34, 28),
-  mcdonalds = makeIcon("geo_mapping/assets/mcdonalds_canada_logo.png", "geo_mapping/assets/mcdonalds_canada_logo.png", 32, 32),
-  starbucks = makeIcon("geo_mapping/assets/starbucks_logo.png", "geo_mapping/assets/starbucks_logo.png", 30, 30),
-  tim_hortons = makeIcon("geo_mapping/assets/tim_hortons_logo.jpg", "geo_mapping/assets/tim_hortons_logo.jpg", 32, 26)
+  blenz = makeIcon("source/assets/blenz_logo.jpeg", "source/assets/blenz_logo.jpeg", 32, 32, shadowWidth = 5),
+  jj_bean = makeIcon("source/assets/jj_bean_logo.png", "source/assets/jj_bean_logo.png", 34, 28),
+  mcdonalds = makeIcon("source/assets/mcdonalds_canada_logo.png", "source/assets/mcdonalds_canada_logo.png", 32, 32),
+  starbucks = makeIcon("source/assets/starbucks_logo.png", "source/assets/starbucks_logo.png", 30, 30),
+  tim_hortons = makeIcon("source/assets/tim_hortons_logo.jpg", "source/assets/tim_hortons_logo.jpg", 32, 26)
 )
 
 
