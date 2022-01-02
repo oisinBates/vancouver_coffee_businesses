@@ -59,4 +59,4 @@ mapped_franchise_locations <- leaflet(formatted_coffee_franchises) %>%
 
 
 # Ouput leaflet widget as html
-with_dir('visualizations', saveWidget(mapped_franchise_locations, file="franchise_locations.html"))
+with_dir('output', saveWidget(mapped_franchise_locations, file="franchise_locations.html"))
