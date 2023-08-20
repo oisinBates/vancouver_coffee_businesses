@@ -56,7 +56,7 @@ coffee_chains$localarea[coffee_chains$house == "490" &
                           coffee_chains$street == "HORNBY ST"] <-
   "Downtown"
 
-# How many businesses are closing and opening each year
+# How many businesses are closing and opening each year?
 license_count_downtown_by_year <- coffee_chains %>%
   filter(localarea == "Downtown") %>%
   group_by(formatted_tradename, year) %>%
@@ -73,12 +73,18 @@ license_count_by_year <- coffee_chains %>%
   inner_join(license_count_downtown_by_year) %>%
   inner_join(license_count_not_downtown_by_year)
 
-# How are employee numbers changing each year
-employee_count <- coffee_chains %>%
+# How are employee and location numbers changing each year?
+premises_and_employee_count <-
+  coffee_chains %>%
   group_by(formatted_tradename, year) %>%
-  tally(name = "employee_count")
+  summarise(location_count = n(),
+            employee_count = sum(as.numeric(numberofemployees))) %>%
+  mutate(average_number_employees_per_location = employee_count / location_count) %>%
+  mutate(across(c(
+    'average_number_employees_per_location'
+  ), round, 2))
 
-# How many consecutive years of operation for each location
+# How many consecutive years of operation for each location?
 consecutive_years_of_operation <-
   coffee_chains %>%
   group_by(house, street, formatted_tradename) %>%
@@ -90,15 +96,8 @@ consecutive_years_of_operation <-
 open_coffee_chains <- coffee_chains %>%
   filter(expireddate > format(Sys.time(), '%Y-%m-%d'))
 
-# Grouping businesses by unique owners
-business_owner_count <- open_coffee_chains %>%
+# How many unique owners are there?
+unique_business_owners <- open_coffee_chains %>%
   group_by(businessname, formatted_tradename) %>%
   tally(name = "numer_of_locations")  %>%
   arrange(formatted_tradename, numer_of_locations)
-
-# How many employees are hired at each location
-premises_and_employee_count <-
-  open_coffee_chains %>%
-  group_by(formatted_tradename) %>%
-  summarise(premises_count = n(),
-            registered_employee_count = sum(as.numeric(numberofemployees)))
