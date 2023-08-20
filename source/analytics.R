@@ -1,5 +1,6 @@
 library(VancouvR)
 library(dplyr)
+library(readr)
 library(stringr)
 
 # Set API Option from .Renviron
@@ -73,6 +74,8 @@ license_count_by_year <- coffee_chains %>%
   inner_join(license_count_downtown_by_year) %>%
   inner_join(license_count_not_downtown_by_year)
 
+write_csv(license_count_by_year, "output/raw_data/license_count_by_year.csv")
+
 # How are employee and location numbers changing each year?
 premises_and_employee_count <-
   coffee_chains %>%
@@ -84,6 +87,8 @@ premises_and_employee_count <-
     'average_number_employees_per_location'
   ), round, 2))
 
+write_csv(premises_and_employee_count, "output/raw_data/premises_and_employee_count.csv")
+
 # How many consecutive years of operation for each location?
 consecutive_years_of_operation <-
   coffee_chains %>%
@@ -92,12 +97,18 @@ consecutive_years_of_operation <-
   tally(name = "consecutive_years_of_operation") %>%
   arrange(formatted_tradename, consecutive_years_of_operation)
 
+write_csv(consecutive_years_of_operation, "output/raw_data/consecutive_years_of_operation.csv")
+
 # Filter only open business
 open_coffee_chains <- coffee_chains %>%
   filter(expireddate > format(Sys.time(), '%Y-%m-%d'))
+
+write_csv(open_coffee_chains, "output/raw_data/open_coffee_chains.csv")
 
 # How many unique owners are there?
 unique_business_owners <- open_coffee_chains %>%
   group_by(businessname, formatted_tradename) %>%
   tally(name = "numer_of_locations")  %>%
   arrange(formatted_tradename, numer_of_locations)
+
+write_csv(unique_business_owners, "output/raw_data/unique_business_owners.csv")

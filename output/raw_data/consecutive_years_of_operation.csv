@@ -1,0 +1,203 @@
+house,street,formatted_tradename,consecutive_years_of_operation
+1100,BURRARD ST,blenz,1
+1615,ROBSON ST,blenz,1
+609,GRANVILLE ST,blenz,1
+992,ROBSON ST,blenz,1
+495,W GEORGIA ST,blenz,3
+508,DAVIE ST,blenz,3
+767,SEYMOUR ST,blenz,6
+935,DENMAN ST,blenz,6
+1120,E 7TH AV,blenz,7
+345,ROBSON ST,blenz,7
+4198,MAIN ST,blenz,7
+508,W HASTINGS ST,blenz,7
+603,ABBOTT ST,blenz,7
+1201,ROBSON ST,blenz,8
+1615,Robson St,blenz,8
+550,BURRARD ST,blenz,8
+708,THURLOW ST,blenz,8
+338,HELMCKEN ST,blenz,9
+401,BURRARD ST,blenz,9
+521,W BROADWAY,blenz,9
+97,W 2ND AV,blenz,9
+999,GRANVILLE ST,blenz,9
+2506,GRANVILLE ST,blenz,10
+1203,DAVIE ST,blenz,11
+232,HOWE ST,blenz,11
+2470,COMMERCIAL DRIVE,blenz,11
+2502,MAPLE ST,blenz,11
+3698,W 4TH AV,blenz,11
+695,W BROADWAY,blenz,11
+700,DAVIE ST,blenz,11
+2904,W BROADWAY,jj_bean,5
+460,RAILWAY ST,jj_bean,6
+425,DUNSMUIR ST,jj_bean,8
+3399,CAMBIE ST,jj_bean,9
+1188,ALBERNI ST,jj_bean,11
+146,W CORDOVA ST,jj_bean,11
+188,W 1ST AV,jj_bean,11
+2206,COMMERCIAL DRIVE,jj_bean,11
+3010,MAIN ST,jj_bean,11
+402,DAVIE ST,jj_bean,11
+4287,FRASER ST,jj_bean,11
+740,HAMILTON ST,jj_bean,11
+1150,Station St,mcdonalds,1
+2599,E HASTINGS ST,mcdonalds,3
+5661,Victoria Drive,mcdonalds,3
+1965,Powell St,mcdonalds,5
+8631,GRANVILLE ST,mcdonalds,7
+5661,VICTORIA DRIVE,mcdonalds,8
+2909,GRANDVIEW HIGHWAY,mcdonalds,10
+1055,W GEORGIA ST,mcdonalds,11
+1527,Main St,mcdonalds,11
+160,SW MARINE DRIVE,mcdonalds,11
+1701,ROBSON ST,mcdonalds,11
+200,BURRARD ST,mcdonalds,11
+2021,Kingsway,mcdonalds,11
+2095,W 41st Av,mcdonalds,11
+275,ROBSON ST,mcdonalds,11
+3695,LOUGHEED HIGHWAY,mcdonalds,11
+4445,MAIN ST,mcdonalds,11
+7295,KNIGHT ST,mcdonalds,11
+830,SW MARINE DRIVE,mcdonalds,11
+86,W PENDER ST,mcdonalds,11
+1395,Main St,starbucks,1
+1702,Robson St,starbucks,2
+3451,Kingsway,starbucks,2
+502,W BROADWAY,starbucks,2
+1033,ROBSON ST,starbucks,3
+788,Robson St,starbucks,3
+818,W 6TH AV,starbucks,3
+3095,W BROADWAY,starbucks,4
+1601,BAYSHORE DRIVE,starbucks,5
+201,TERMINAL AV,starbucks,5
+260,E BROADWAY,starbucks,5
+311,E BROADWAY,starbucks,5
+3820,Oak St,starbucks,5
+8540,RIVER DIST. CROSSING,starbucks,5
+900,Granville St,starbucks,5
+1014,W GEORGIA ST,starbucks,6
+1855,BURRARD ST,starbucks,6
+2531,E HASTINGS ST,starbucks,6
+2699,W BROADWAY,starbucks,6
+2902,W Broadway,starbucks,6
+555,W HASTINGS ST,starbucks,7
+1067,W CORDOVA ST,starbucks,8
+1088,BURRARD ST,starbucks,8
+1095,HOWE ST,starbucks,8
+111,W BROADWAY,starbucks,8
+1160,DAVIE ST,starbucks,8
+1500,Yew St,starbucks,8
+1502,E HASTINGS ST,starbucks,8
+1752,Commercial Dr,starbucks,8
+1758,W BROADWAY,starbucks,8
+200,Burrard St,starbucks,8
+2270,W 4TH AV,starbucks,8
+2288,GRANVILLE ST,starbucks,8
+2348,W 41ST AV,starbucks,8
+2517,Commercial Dr,starbucks,8
+398,ROBSON ST,starbucks,8
+429,HOWE ST,starbucks,8
+433,Seymour St,starbucks,8
+4580,W 10th Av,starbucks,8
+472,SW MARINE DRIVE,starbucks,8
+650,W 41st Av,starbucks,8
+1055,DUNSMUIR ST,starbucks,9
+1055,W GEORGIA ST,starbucks,9
+1301,Robson St,starbucks,9
+1500,W 2ND AV,starbucks,9
+1777,QUEBEC ST,starbucks,9
+2378,CAMBIE ST,starbucks,9
+2690,Granville St,starbucks,9
+2980,Main St,starbucks,9
+4588,FRASER ST,starbucks,9
+4635,ARBUTUS ST,starbucks,9
+555,W 12TH AV,starbucks,9
+600,Dunsmuir St,starbucks,9
+605,DAVIE ST,starbucks,9
+682,W BROADWAY,starbucks,9
+8002,Granville St,starbucks,9
+811,Hornby St,starbucks,9
+860,DRAKE ST,starbucks,9
+868,BEATTY ST,starbucks,9
+930,BURRARD ST,starbucks,9
+700,W PENDER ST,starbucks,10
+888,W 28TH AV,starbucks,10
+1095,W Pender St,starbucks,11
+1097,Davie St,starbucks,11
+1099,ROBSON ST,starbucks,11
+1195,Mainland St,starbucks,11
+125,Davie St,starbucks,11
+1795,DAVIE ST,starbucks,11
+1895,CORNWALL AV,starbucks,11
+199,Water St,starbucks,11
+2035,YUKON ST,starbucks,11
+2193,W 41ST AV,starbucks,11
+2505,Granville St,starbucks,11
+2685,E 49TH AV,starbucks,11
+2840,BENTALL ST,starbucks,11
+3190,MACDONALD ST,starbucks,11
+3492,Cambie St,starbucks,11
+3665,KINGSWAY,starbucks,11
+4467,Dunbar St,starbucks,11
+5504,CAMBIE ST,starbucks,11
+580,BUTE ST,starbucks,11
+601,W Cordova St,starbucks,11
+6544,FRASER ST,starbucks,11
+7010,KERR ST,starbucks,11
+720,Granville St,starbucks,11
+753,TERMINAL AV,starbucks,11
+785,DENMAN ST,starbucks,11
+8201,ONTARIO ST,starbucks,11
+850,POWELL ST,starbucks,11
+891,Dunsmuir St,starbucks,11
+960,Seymour St,starbucks,11
+99,Keefer Place,starbucks,11
+999,Canada Place,starbucks,11
+1001,DENMAN ST,tim_hortons,3
+2698,RUPERT ST,tim_hortons,3
+590,BEATTY ST,tim_hortons,3
+889,GREAT NORTHERN WAY,tim_hortons,4
+2801,E HASTINGS ST,tim_hortons,5
+5698,VICTORIA DRIVE,tim_hortons,5
+818,W 6TH AV,tim_hortons,5
+1752,DAVIE ST,tim_hortons,6
+487,INTERURBAN WAY,tim_hortons,6
+998,GRANVILLE ST,tim_hortons,6
+1595,W BROADWAY,tim_hortons,7
+195,TERMINAL AV,tim_hortons,7
+206,KEEFER ST,tim_hortons,7
+2899,E 12TH AV,tim_hortons,7
+4401,W 10TH AV,tim_hortons,7
+5896,FRASER ST,tim_hortons,7
+1130,W PENDER ST,tim_hortons,8
+2501,MAIN ST,tim_hortons,8
+3102,W BROADWAY,tim_hortons,8
+3463,DUNBAR ST,tim_hortons,8
+5055,JOYCE ST,tim_hortons,8
+650,W 41ST AV,tim_hortons,8
+1150,ALBERNI ST,tim_hortons,9
+2225,W 41ST AV,tim_hortons,9
+3451,KINGSWAY,tim_hortons,9
+490,HORNBY ST,tim_hortons,9
+1299,ROBSON ST,tim_hortons,10
+3502,E HASTINGS ST,tim_hortons,10
+505,BURRARD ST,tim_hortons,10
+1055,W GEORGIA ST,tim_hortons,11
+1055,W Georgia St,tim_hortons,11
+108,W PENDER ST,tim_hortons,11
+1205,BURRARD ST,tim_hortons,11
+1635,COMMERCIAL DRIVE,tim_hortons,11
+200,BURRARD ST,tim_hortons,11
+306,TERMINAL AV,tim_hortons,11
+4500,OAK ST,tim_hortons,11
+463,ROBSON ST,tim_hortons,11
+555,W HASTINGS ST,tim_hortons,11
+607,Dunsmuir St,tim_hortons,11
+650,W GEORGIA ST,tim_hortons,11
+6525,OAK ST,tim_hortons,11
+678,DUNSMUIR ST,tim_hortons,11
+750,W Pender St,tim_hortons,11
+756,DAVIE ST,tim_hortons,11
+865,W Broadway,tim_hortons,11
+947,HORNBY ST,tim_hortons,11
