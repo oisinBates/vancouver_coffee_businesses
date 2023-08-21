@@ -2,6 +2,7 @@ library(dplyr)
 library(ggplot2)
 library(readr)
 library(stringr)
+library(tidyr)
 library(VancouvR)
 
 # Set API Option from .Renviron
@@ -27,7 +28,7 @@ coffee_businesses <-
 
 # Starbucks has premises registered under the business types of `Wholesale  Dealer` and `Instruction` at `2930 VIRTUAL WAY`.
 # JJ Bean had a premises registered from 2013 to 2018 registered under the business types of `Manufacturer - Food` at `460 RAILWAY ST`.
-# Since these business types are not customer facing, they are filtered out of this dataframe.
+# Since these business types are not customer facing, they are filtered out.
 coffee_chains <- coffee_businesses %>%
   mutate(
     formatted_tradename = case_when(
@@ -122,6 +123,21 @@ unique_business_owners <- open_coffee_chains %>%
 write_csv(unique_business_owners,
           "output/raw_data/unique_business_owners.csv")
 
+# When did each location open, and is it still open?
+# This data is mostly for the sake of the Gantt charts
+min_and_max_years_of_operation <-
+  coffee_chains %>%
+  filter(localarea == "Downtown") %>%
+  unite(full_address, c("house", "street"), sep = " ") %>%
+  mutate(full_address = toupper(full_address)) %>%
+  group_by(full_address, formatted_tradename) %>%
+  summarise(min = min(year),
+            max = max(year)) %>%
+  arrange(formatted_tradename)
+
+write_csv(unique_business_owners,
+          "output/raw_data/min_and_max_years_of_operation.csv")
+
 ### End data wrangling/csv generation ###
 
 ### Start visualization ###
@@ -178,6 +194,51 @@ ggplot(
 
 ggsave("output/line_plots/coffee_chains_downtown_vancouver.png")
 ###### End line plot generation ######
+
+###### Start Gantt chart generation ######
+
+# Opting to generate individual charts for each location, for ease of readability
+generate_gantt_chart <-
+  function(store_name,
+           trade_name,
+           min_and_max_years_of_operation) {
+    filtered_data <- min_and_max_years_of_operation %>%
+      filter(formatted_tradename == trade_name)
+
+    # As some store locations were only operational for a single year, these don't show with geom_segment()
+    # Adding geom_point() so stores, only in operation for a single year, are visible on their plot
+    ggplot(
+      filtered_data,
+      aes(
+        x = min,
+        xend = max,
+        y = full_address,
+        yend = full_address,
+        color = formatted_tradename
+      )
+    ) +
+      geom_segment(linewidth = 4.2, show.legend = FALSE) +
+      geom_point(aes(x = min),
+                 shape = 'square',
+                 size = 3.9,
+                 show.legend = FALSE) +
+      scale_color_manual(values = coffee_brand_colors) +
+      labs(
+        title = paste("Downtown Vancouver", store_name, "Locations"),
+        y = "Store Location",
+        x = "Year"
+      )
+
+    save_path <- paste0("output/gantt_charts/", trade_name, ".png")
+    ggsave(save_path)
+  }
+generate_gantt_chart("Blenz", "blenz", min_and_max_years_of_operation)
+generate_gantt_chart("JJ Bean", "jj_bean", min_and_max_years_of_operation)
+generate_gantt_chart("McDonald's", "mcdonalds", min_and_max_years_of_operation)
+generate_gantt_chart("Starbucks", "starbucks", min_and_max_years_of_operation)
+generate_gantt_chart("Tim Hortons", "tim_hortons", min_and_max_years_of_operation)
+
+###### End Gantt chart generation ######
 
 
 ### End visualization ###
