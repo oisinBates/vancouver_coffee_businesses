@@ -1,4 +1,5 @@
 library(dplyr)
+library(geosphere)
 library(ggplot2)
 library(readr)
 library(stringr)
@@ -138,6 +139,26 @@ min_and_max_years_of_operation <-
 write_csv(unique_business_owners,
           "output/raw_data/min_and_max_years_of_operation.csv")
 
+# What is the Haversine distance of each Downtown store to the City Center (Granville & West Georgia Street)
+# I thought that a circular barplot could be an interesting way to visualize relative distance
+# Calculating haversine distance with the geosphere library and the solution at https://stackoverflow.com/a/53559542
+haversince_distance_to_city_center <- coffee_chains %>%
+  filter(localarea == "Downtown") %>%
+  mutate(Long = as.numeric(sub(".*\\[(.*?),.*", "\\1", geom)), Lat = as.numeric(sub(".* (.*)\\].*", "\\1", geom))) %>%
+  unite(full_address, c("house", "street"), sep = " ") %>%
+  mutate(full_address = toupper(full_address)) %>%
+  rowwise() %>%
+  # Granville & West Georgia = c(-123.11817, 49.28249)
+  mutate(meter_distance_to_city_centre = distHaversine(c(Long, Lat), c(-123.11817, 49.28249))) %>%
+  arrange(formatted_tradename, meter_distance_to_city_centre) %>%
+  mutate(meter_distance_string = paste0("(", round(meter_distance_to_city_centre), " m)")) %>%
+  unite(
+    full_address_and_distance,
+    c("full_address", "meter_distance_string"),
+    remove = FALSE,
+    sep = " "
+  )
+
 ### End data wrangling/csv generation ###
 
 ### Start visualization ###
@@ -239,6 +260,62 @@ generate_gantt_chart("Starbucks", "starbucks", min_and_max_years_of_operation)
 generate_gantt_chart("Tim Hortons", "tim_hortons", min_and_max_years_of_operation)
 
 ###### End Gantt chart generation ######
+
+###### Start circular barplot generation ######
+# This solution is adapted from the example at https://r-graph-gallery.com/296-add-labels-to-circular-barplot.html
+haversince_distance_to_city_center$x_axis_id = seq(1, nrow(haversince_distance_to_city_center))
+row_count <- nrow(haversince_distance_to_city_center)
+angle <-
+  90 - 360 * (haversince_distance_to_city_center$x_axis_id - 0.5) / row_count
+haversince_distance_to_city_center$hjust <-
+  ifelse(angle < -90, 1, 0)
+haversince_distance_to_city_center$angle <-
+  ifelse(angle < -90, angle + 180, angle)
+
+
+ggplot(
+  active_businesses_with_haversine,
+  aes(
+    x = factor(x_axis_id),
+    y = meter_distance_to_city_centre,
+    fill =
+      formatted_tradename
+  )
+) +
+  geom_bar(stat = "identity") +
+  ylim(-1300, 1800) +
+  scale_x_discrete(labels = active_businesses_with_haversine$full_address_and_distance) +
+  scale_fill_manual(name = "Store Name",
+                    values = coffee_brand_colors,
+                    labels = coffee_brand_labels) +
+  theme_minimal() +
+  theme(
+    axis.text = element_blank(),
+    axis.title = element_blank(),
+    panel.grid = element_blank()
+  ) +
+  coord_polar(clip = "off") +
+  geom_text(
+    aes(
+      x = x_axis_id,
+      y = meter_distance_to_city_centre + 40,
+      label = full_address_and_distance,
+      hjust = hjust
+    ),
+    color = "black",
+    fontface = "bold",
+    alpha = 0.6,
+    size = 2.5,
+    angle = active_businesses_with_haversine$angle,
+    inherit.aes = FALSE
+  ) +
+  labs(title = "Meter distance to City Center",
+       subtitle = "(Granville & West Georgia Street)")
+
+# Programmatic saving via ggsave() was proving problematic, given the level of customization in this plot. As this is a one-off custom plot, I opted to export its png file manually
+# 800 width x 750 height
+
+###### End circular barplot generation ######
 
 
 ### End visualization ###
