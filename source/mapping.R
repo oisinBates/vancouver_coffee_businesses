@@ -92,7 +92,6 @@ create_interactive_map <-
   function(year,
            coffee_icon_list,
            formatted_coffee_businesses) {
-    # year <- "2020"
     formatted_year = substr(year, 3, 4)
 
     filtered_data <-
