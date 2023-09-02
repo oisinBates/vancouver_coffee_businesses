@@ -237,31 +237,12 @@ generate_gantt_chart <-
         x = as.numeric(min),
         xend = as.numeric(max),
         y = full_address,
-        yend = full_address
+        yend = full_address,
+        color = formatted_tradename
       )
     ) +
-      geom_segment(linewidth = 2,
-                   colour = "grey",
-                   show.legend = FALSE) +
-      geom_point(
-        aes(x = as.numeric(min)),
-        shape = 21,
-        colour = "black",
-        fill = "green",
-        size = 5,
-        stroke = 1,
-        show.legend = FALSE
-      ) +
-      geom_point(
-        aes(x = as.numeric(year_closed)),
-        shape = 21,
-        colour = "black",
-        fill = "red",
-        size = 5,
-        stroke = 1,
-        show.legend = FALSE
-      ) +
-      theme_bw() +
+      geom_segment(linewidth = 4.2, show.legend = FALSE) +
+      scale_color_manual(values = coffee_brand_colors) +
       labs(
         title = paste("Downtown Vancouver", store_name, "Locations"),
         y = "Store Location",
