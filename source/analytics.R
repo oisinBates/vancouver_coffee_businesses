@@ -224,31 +224,50 @@ generate_gantt_chart <-
            trade_name,
            min_and_max_years_of_operation) {
     filtered_data <- min_and_max_years_of_operation %>%
-      filter(formatted_tradename == trade_name)
+      filter(formatted_tradename == trade_name) %>%
+      # if max year of operation is less than this year, the store is closed
+      mutate(year_closed = if_else(max < format(Sys.Date(), "%y"), max, NA)) %>%
+      # add extra year as licenses run from Jan 1st to Dec 31st
+      mutate(max = as.numeric(max) + 1,
+             year_closed = as.numeric(year_closed) + 1)
 
-    # As some store locations were only operational for a single year, these don't show with geom_segment()
-    # Adding geom_point() so stores, only in operation for a single year, are visible on their plot
     ggplot(
       filtered_data,
       aes(
-        x = min,
-        xend = max,
+        x = as.numeric(min),
+        xend = as.numeric(max),
         y = full_address,
-        yend = full_address,
-        color = formatted_tradename
+        yend = full_address
       )
     ) +
-      geom_segment(linewidth = 4.2, show.legend = FALSE) +
-      geom_point(aes(x = min),
-                 shape = 'square',
-                 size = 3.9,
-                 show.legend = FALSE) +
-      scale_color_manual(values = coffee_brand_colors) +
+      geom_segment(linewidth = 2,
+                   colour = "grey",
+                   show.legend = FALSE) +
+      geom_point(
+        aes(x = as.numeric(min)),
+        shape = 21,
+        colour = "black",
+        fill = "green",
+        size = 5,
+        stroke = 1,
+        show.legend = FALSE
+      ) +
+      geom_point(
+        aes(x = as.numeric(year_closed)),
+        shape = 21,
+        colour = "black",
+        fill = "red",
+        size = 5,
+        stroke = 1,
+        show.legend = FALSE
+      ) +
+      theme_bw() +
       labs(
         title = paste("Downtown Vancouver", store_name, "Locations"),
         y = "Store Location",
         x = "Year"
-      )
+      ) +
+      scale_x_continuous(breaks = c(13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24))
 
     save_path <- paste0("output/gantt_charts/", trade_name, ".png")
     ggsave(save_path)
