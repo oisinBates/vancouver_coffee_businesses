@@ -129,9 +129,12 @@ write_csv(unique_business_owners,
 min_and_max_years_of_operation <-
   coffee_chains %>%
   filter(localarea == "Downtown") %>%
-  unite(full_address, c("house", "street"), sep = " ") %>%
+  unite(full_address,
+        c("house", "street"),
+        remove = FALSE,
+        sep = " ") %>%
   mutate(full_address = toupper(full_address)) %>%
-  group_by(full_address, formatted_tradename) %>%
+  group_by(house, street, full_address, formatted_tradename) %>%
   summarise(min = min(year),
             max = max(year)) %>%
   arrange(formatted_tradename)
@@ -229,15 +232,18 @@ generate_gantt_chart <-
       mutate(year_closed = if_else(max < format(Sys.Date(), "%y"), max, NA)) %>%
       # add extra year as licenses run from Jan 1st to Dec 31st
       mutate(max = as.numeric(max) + 1,
-             year_closed = as.numeric(year_closed) + 1)
+             year_closed = as.numeric(year_closed) + 1) %>%
+      arrange(min, year_closed, as.numeric(house), street)
+
+    filtered_data$y_axis_id = seq(1, nrow(filtered_data))
 
     ggplot(
       filtered_data,
       aes(
         x = as.numeric(min),
         xend = as.numeric(max),
-        y = full_address,
-        yend = full_address,
+        y = factor(y_axis_id),
+        yend = factor(y_axis_id),
         color = formatted_tradename
       )
     ) +
@@ -248,7 +254,8 @@ generate_gantt_chart <-
         y = "Store Location",
         x = "Year"
       ) +
-      scale_x_continuous(breaks = c(13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24))
+      scale_x_continuous(breaks = c(13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24)) +
+      scale_y_discrete(labels = filtered_data$full_address)
 
     save_path <- paste0("output/gantt_charts/", trade_name, ".png")
     ggsave(save_path)
